@@ -1,8 +1,8 @@
 import contextlib
 from gettext import gettext as _
 from typing import Annotated, AsyncIterator
-from fastapi import Depends
 
+from fastapi import Depends
 from sqlalchemy.ext.asyncio import (
     AsyncConnection,
     AsyncSession,

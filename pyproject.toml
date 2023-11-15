@@ -21,6 +21,7 @@ mypy = "^1.7.0"
 black = "^23.11.0"
 isort = "^5.12.0"
 sqlalchemy2-stubs = "^0.0.2a36"
+pre-commit = "^3.5.0"
 
 [build-system]
 requires = ["poetry-core"]

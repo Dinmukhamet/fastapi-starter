@@ -1,7 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncAttrs
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from sqlalchemy.orm import Mapped, mapped_column, registry
-from sqlalchemy.orm.decl_api import DeclarativeMeta
 
 from .managers import QuerySetMixin
 

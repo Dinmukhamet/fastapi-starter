@@ -2,10 +2,10 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.users.views import router
+
 from .db import DatabaseSessionManager
 from .deps import get_settings
-
-from app.users.views import router
 
 
 def app():
