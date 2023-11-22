@@ -8,16 +8,14 @@ from .db import DatabaseSessionManager
 from .deps import get_settings
 
 
-def app():
-    settings = get_settings()
-    sessionmanager = DatabaseSessionManager()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    if app.state.sessionmanager._engine is not None:
+        await app.state.sessionmanager.close()
 
-    @asynccontextmanager
-    async def lifespan(app: FastAPI):
-        yield
-        if sessionmanager._engine is not None:
-            await sessionmanager.close()
 
-    server = FastAPI(title="FastAPI server", lifespan=lifespan, debug=settings.debug)
-    server.include_router(router)
-    return server
+settings = get_settings()
+app = FastAPI(title="FastAPI app", lifespan=lifespan, debug=settings.debug)
+app.state.sessionmanager = DatabaseSessionManager()
+app.include_router(router)

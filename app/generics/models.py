@@ -1,3 +1,6 @@
+from datetime import datetime
+
+from sqlalchemy import DateTime, func
 from sqlalchemy.ext.asyncio import AsyncAttrs
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from sqlalchemy.orm import Mapped, mapped_column, registry
@@ -25,4 +28,8 @@ class Model(AsyncAttrs, Base):
     __abstract__ = True
 
     id: Mapped[int] = mapped_column(primary_key=True)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.timezone("Asia/Bishkek", func.now()),
+    )
     objects: QuerySetMixin

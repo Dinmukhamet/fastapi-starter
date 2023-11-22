@@ -56,11 +56,13 @@ class DatabaseSessionManager:
         session = self._sessionmaker()
         try:
             yield session
-        except Exception:
+        except Exception as e:
             await session.rollback()
-            raise
+            raise e
         finally:
             await session.close()
+
+        await session.close()
 
 
 async def get_db():
